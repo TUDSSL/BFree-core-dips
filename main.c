@@ -391,10 +391,10 @@ int run_repl(void) {
     return exit_code;
 }
 
-#define MICROPY_DISABLE_NEOPIXEL (1)
+//#define MICROPY_DISABLE_NEOPIXEL (1)
 
 // We disabled it, it can't take low volage rises
-#if !defined(MICROPY_HW_NEOPIXEL) && MICROPY_DISABLE_NEOPIXEL
+#if !defined(MICROPY_HW_NEOPIXEL) && !MICROPY_DISABLE_NEOPIXEL
 static uint8_t status_neopixel_color[3];
 static digitalio_digitalinout_obj_t status_neopixel;
 #include "shared-bindings/neopixel_write/__init__.h"
@@ -421,8 +421,8 @@ int __attribute__((used)) main(void) {
 
     // Turn on LEDs
     init_status_leds();
-    rgb_led_status_init();
-    rgb_led_status_clear();
+    //rgb_led_status_init();
+    //rgb_led_status_clear();
 
     // Wait briefly to give a reset window where we'll enter safe mode after the reset.
     if (safe_mode == NO_SAFE_MODE) {

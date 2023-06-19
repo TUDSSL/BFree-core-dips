@@ -61,9 +61,9 @@ void reset_all_pins(void) {
     pin_mask[0] &= ~(PORT_PA24 | PORT_PA25);
 
     // Do not reset SWD when a debugger is present.
-    if (DSU->STATUSB.bit.DBGPRES == 1) {
+   // if (DSU->STATUSB.bit.DBGPRES == 1) {
         pin_mask[0] &= ~(PORT_PA30 | PORT_PA31);
-    }
+   // }
 
     for (uint32_t i = 0; i < PORT_COUNT; i++) {
         pin_mask[i] &= ~never_reset_pins[i];
@@ -84,8 +84,8 @@ void reset_all_pins(void) {
     gpio_set_pin_function(PIN_PA30, MUX_PA30H_CM4_SWCLK);
     #endif
     #ifdef SAMD21
-    gpio_set_pin_function(PIN_PA30, GPIO_PIN_FUNCTION_G);
-    gpio_set_pin_function(PIN_PA31, GPIO_PIN_FUNCTION_G);
+    //gpio_set_pin_function(PIN_PA30, GPIO_PIN_FUNCTION_G);
+    //gpio_set_pin_function(PIN_PA31, GPIO_PIN_FUNCTION_G);
     #endif
 
     #ifdef MICROPY_HW_NEOPIXEL
@@ -142,7 +142,7 @@ void reset_pin_number(uint8_t pin_number) {
         #ifdef SAMD21
         || pin_number == PIN_PA31) {
         #endif
-        gpio_set_pin_function(pin_number, SWD_MUX);
+      //  gpio_set_pin_function(pin_number, SWD_MUX);
     } else {
         gpio_set_pin_direction(pin_number, GPIO_DIRECTION_OFF);
         gpio_set_pin_function(pin_number, GPIO_PIN_FUNCTION_OFF);
@@ -187,9 +187,9 @@ bool pin_number_is_free(uint8_t pin_number) {
     volatile PORT_PMUX_Type *pmux = &port->PMUX[pin_index / 2];
 
     if (pin_number == PIN_PA30 || pin_number == PIN_PA31) {
-        if (DSU->STATUSB.bit.DBGPRES == 1) {
+        //if (DSU->STATUSB.bit.DBGPRES == 1) {
             return false;
-        }
+       // }
         if (pin_number == PIN_PA30
             #ifdef SAMD51
             ) {
@@ -209,9 +209,9 @@ bool common_hal_mcu_pin_is_free(const mcu_pin_obj_t* pin) {
     #ifdef MICROPY_HW_NEOPIXEL
     if (pin == MICROPY_HW_NEOPIXEL) {
         // Special case for Metro M0 where the NeoPixel is also SWCLK
-        if (MICROPY_HW_NEOPIXEL == &pin_PA30 && DSU->STATUSB.bit.DBGPRES == 1) {
+       // if (MICROPY_HW_NEOPIXEL == &pin_PA30 && DSU->STATUSB.bit.DBGPRES == 1) {
             return false;
-        }
+        //}
         return !neopixel_in_use;
     }
     #endif

@@ -12,12 +12,13 @@ Take care of dependencies first. [See here](https://learn.adafruit.com/building-
 
 This takes a while the first time but `Makefile` should be good for minor (single file) changes afterwards.
 
+Building the firmware is tested with gcc version 9.3.1 20200408 (release).
+
 ```
 git clone https://github.com/adafruit/circuitpython.git
 cd circuitpython
 git submodule sync
 git submodule update --init --recursive
-make -C mpy-cross
 cd ports/atmel-samd
 make BOARD=metro_m0_express DEBUG=1
 

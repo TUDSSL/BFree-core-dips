@@ -39,8 +39,8 @@ digitalio_digitalinout_obj_t tx_led;
 
 void init_status_leds(void) {
     #ifdef MICROPY_HW_LED_RX
-    common_hal_digitalio_digitalinout_construct(&rx_led, MICROPY_HW_LED_RX);
-    common_hal_digitalio_digitalinout_switch_to_output(&rx_led, true, DRIVE_MODE_PUSH_PULL);
+    //common_hal_digitalio_digitalinout_construct(&rx_led, MICROPY_HW_LED_RX);
+    //common_hal_digitalio_digitalinout_switch_to_output(&rx_led, true, DRIVE_MODE_PUSH_PULL);
     #endif
     #ifdef MICROPY_HW_LED_TX
     common_hal_digitalio_digitalinout_construct(&tx_led, MICROPY_HW_LED_TX);
@@ -50,7 +50,7 @@ void init_status_leds(void) {
 
 void toggle_rx_led(void) {
     #ifdef MICROPY_HW_LED_RX
-    common_hal_digitalio_digitalinout_set_value(&rx_led, !common_hal_digitalio_digitalinout_get_value(&rx_led));
+    //common_hal_digitalio_digitalinout_set_value(&rx_led, !common_hal_digitalio_digitalinout_get_value(&rx_led));
     #endif
 }
 
